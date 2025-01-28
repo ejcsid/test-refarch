@@ -1,9 +1,9 @@
-name: scan
+name: Image scan
 on:
   workflow_dispatch:
     inputs:
       image-name:
-        description: "Image to san"
+        description: "Image to csan"
         required: true
         default: "ghcr.io/it-at-m/pentaho-carte:latest"
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: '${{ image-name }}'
+          image-ref: '${{ inputs.image-name }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
